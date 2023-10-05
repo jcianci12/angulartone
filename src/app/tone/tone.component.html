@@ -1,0 +1,14 @@
+
+    <div *ngIf="shouldStart">
+      <select [(ngModel)]="type">
+        <option *ngFor="let t of types" [value]="t">{{t}}</option>
+      </select>
+      <select [(ngModel)]="note">
+        <option *ngFor="let n of notes" [value]="n">{{n}}</option>
+      </select>
+      <select [(ngModel)]="duration">
+        <option *ngFor="let d of durations" [value]="d">{{d}}</option>
+      </select>
+      <button (click)="playTone()">Play Tone</button>
+    </div>
+  
