@@ -1,27 +1,47 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Tone } from '../interfaces/tone';
+import { PlaypausestopComponent } from '../playpausestop/playpausestop.component';
+import { ClockService } from '../services/clock';
 
 @Component({
   selector: 'app-tone',
   templateUrl: "tone.component.html",
 })
 export class ToneComponent implements OnInit {
-  @Input() shouldStart: boolean | undefined;
+  @Input() tone:Tone = {duration:1000,index:1,note:220,type:"sine",uid:"1"};
+  @Output() toneChange:EventEmitter<Tone> = new EventEmitter<Tone>()
+  constructor(public clockservice:ClockService) { 
+
+    this.clockservice.time.subscribe(t => {
+      console.log("tick",t)
+
+      if(this.tone.index==t){
+        this.playTone()
+      }
+    });
+
+  }
   context = new AudioContext();
-  type = 'sine';
   types = ['sine', 'square', 'sawtooth', 'triangle'];
-  note = 440;
   notes = [220, 440, 880];
-  duration = 1000;
+  duration = this.tone!.duration;
   durations = [500, 1000, 2000];
 
-  ngOnInit() {}
+  ngOnInit(): void {
+   
+  }
 
   playTone() {
+    this.play(this.tone.type, this.tone.note, this.duration);
+  }
+
+
+  play(type: string, note: number, duration: number) {
     const oscillator = this.context.createOscillator();
-    oscillator.type = this.type as OscillatorType;
-    oscillator.frequency.value = this.note;
+    oscillator.type = type as OscillatorType;
+    oscillator.frequency.value = note;
     oscillator.connect(this.context.destination);
     oscillator.start();
-    setTimeout(() => oscillator.stop(), this.duration);
+    setTimeout(() => oscillator.stop(), duration);
   }
 }

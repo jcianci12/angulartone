@@ -1,1 +1,21 @@
-<app-tone></app-tone>
+<app-playpausestop></app-playpausestop>
+
+<button (click)="addTone()">Add tone</button>
+<table class="table table-striped">
+  <thead>
+    <th>
+      <tr><th>Test</th></tr>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of player.tones">
+      <td>{{item|json}}
+<app-tone [tone]="item" (toneChange)="updateTone(item)"></app-tone>
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
