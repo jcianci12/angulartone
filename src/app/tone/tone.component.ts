@@ -1,47 +1,39 @@
+// tone.component.ts
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Tone } from '../interfaces/tone';
-import { PlaypausestopComponent } from '../playpausestop/playpausestop.component';
+import { ToneInterface } from '../interfaces/tone';
 import { ClockService } from '../services/clock';
+import { ToneService } from '../services/tone';
+import * as Tone from 'tone';
 
 @Component({
   selector: 'app-tone',
   templateUrl: "tone.component.html",
+  styleUrls:["tone.component.css"],
+  providers:[ToneService]
 })
 export class ToneComponent implements OnInit {
-  @Input() tone:Tone = {duration:1000,index:1,note:220,type:"sine",uid:"1"};
-  @Output() toneChange:EventEmitter<Tone> = new EventEmitter<Tone>()
-  constructor(public clockservice:ClockService) { 
+  @Input() tone:ToneInterface = {duration:"8n",index:1,note:"C4",type:"sine",uid:"1"};
+  @Output() toneChange:EventEmitter<ToneInterface> = new EventEmitter<ToneInterface>()
+  durations = ['8n', '4n', '2n']; // Update durations to use Tone.js rhythmic values
+  notes = ['C4','D4','E4','F4','G4','A4','B4','C5'] // Update notes to use scientific pitch notation
+      types = ['sine', 'square', 'sawtooth', 'triangle'];
+time = 0
+  constructor(public clockservice:ClockService, private toneService: ToneService) { 
 
     this.clockservice.time.subscribe(t => {
+this.time = t
       console.log("tick",t)
 
       if(this.tone.index==t){
-        this.playTone()
+        this.toneService.playTone(this.tone);
       }
     });
 
   }
-  context = new AudioContext();
-  types = ['sine', 'square', 'sawtooth', 'triangle'];
-  notes = [220, 440, 880];
-  duration = this.tone!.duration;
-  durations = [500, 1000, 2000];
-
+  playTone() {
+    this.toneService.playTone(this.tone);
+  }
   ngOnInit(): void {
    
-  }
-
-  playTone() {
-    this.play(this.tone.type, this.tone.note, this.duration);
-  }
-
-
-  play(type: string, note: number, duration: number) {
-    const oscillator = this.context.createOscillator();
-    oscillator.type = type as OscillatorType;
-    oscillator.frequency.value = note;
-    oscillator.connect(this.context.destination);
-    oscillator.start();
-    setTimeout(() => oscillator.stop(), duration);
   }
 }

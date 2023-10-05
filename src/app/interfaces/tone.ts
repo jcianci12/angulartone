@@ -1,7 +1,7 @@
-export interface Tone {
+export interface ToneInterface {
     type: string;
-    note: number;
-    duration: number;
+    note: string;
+    duration: string;
     index:number;
     uid:string;
   }

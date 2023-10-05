@@ -1,4 +1,4 @@
-import { Goto, Tone } from "../interfaces/tone";
+import { Goto, ToneInterface } from "../interfaces/tone";
 
 export class TonePlayer {
     types = ['sine', 'square', 'sawtooth', 'triangle'];
@@ -6,9 +6,9 @@ export class TonePlayer {
     durations = [500, 1000, 2000];
     playIndex = 1;
     
-    tones: (Tone|Goto)[] = [];
+    tones: (ToneInterface|Goto)[] = [];
 
-    addTone(type: string, note: number, duration: number, index: number,uid:string) {
+    addTone(type: string, note: string, duration: string, index: number,uid:string) {
         this.tones.push({ type, note, duration, index,uid });
     }
     addGoto(index: number,uid:string,gotoIndex:number) {

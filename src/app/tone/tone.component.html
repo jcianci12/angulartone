@@ -1,13 +1,14 @@
 
-      <select [(ngModel)]="tone.type" >
-        <option *ngFor="let t of types" [value]="t">{{t}}</option>
-      </select>
-      <select [(ngModel)]="tone.note" >
-        <option *ngFor="let n of notes" [value]="n">{{n}}</option>
-      </select>
-      <select [(ngModel)]="tone.duration" >
-        <option *ngFor="let d of durations" [value]="d">{{d}}</option>
-      </select>
-      <input [(ngModel)]="tone.index" type="number">
-      <button (click)="playTone()">Play Tone</button>
-
+<div [ngClass]="{'highlight': tone.index == time}">
+  <select [(ngModel)]="tone.type" >
+    <option *ngFor="let t of types" [value]="t">{{t}}</option>
+  </select>
+  <select [(ngModel)]="tone.note" >
+    <option *ngFor="let n of notes" [value]="n">{{n}}</option>
+  </select>
+  <select [(ngModel)]="tone.duration" >
+    <option *ngFor="let d of durations" [value]="d">{{d}}</option>
+  </select>
+  <input [(ngModel)]="tone.index" type="number">
+  <button (click)="playTone()">Play Tone</button>
+</div>
