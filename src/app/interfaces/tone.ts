@@ -5,3 +5,9 @@ export interface Tone {
     index:number;
     uid:string;
   }
+
+  export interface Goto {
+    index:number;
+    uid:string;
+    gotoIndex:number;
+  }

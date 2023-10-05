@@ -1,6 +1,8 @@
 <app-playpausestop></app-playpausestop>
 
 <button (click)="addTone()">Add tone</button>
+<button (click)="addGoto()">Add Goto</button>
+
 <table class="table table-striped">
   <thead>
     <th>
@@ -9,13 +11,19 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of player.tones">
-      <td>{{item|json}}
-<app-tone [tone]="item" (toneChange)="updateTone(item)"></app-tone>
-
-
+      <td>
+        <ng-container *ngIf="item | isTone; else gotoBlock">
+          <app-tone [tone]="item|gettone"></app-tone>
+        </ng-container>
+        <ng-template #gotoBlock>
+          <!-- Replace 'app-goto' with your actual Goto component selector -->
+          <app-goto [goto]="item|getgoto"></app-goto>
+        </ng-template>
       </td>
+
     </tr>
   </tbody>
 </table>
 
 
+{{player.tones|json}}
