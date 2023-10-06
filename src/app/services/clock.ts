@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClockService {
+  constructor(){
+    this.time.next(0)
+  }
   public _time = 0;
-  public time = new BehaviorSubject<number>(this._time);
+  public time = new Subject<number>();
   intervalId:any
   start() {
     this.intervalId = setInterval(() => {

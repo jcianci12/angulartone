@@ -10,7 +10,7 @@
     </th>
   </thead>
   <tbody>
-    <tr *ngFor="let item of player.tones">
+    <tr *ngFor="let item of tones">
       <td>
         <app-delete [tone]="item"></app-delete>
 
@@ -28,4 +28,4 @@
 </table>
 
 
-{{player.tones|json}}
+{{tones|json}}

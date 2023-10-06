@@ -9,9 +9,10 @@ import { ClockService } from '../services/clock';
 })
 export class GotoComponent {
   @Input() goto:Goto = {index:1,gotoIndex:1,uid:"1"};
+  subscription: any;
   constructor(public clockservice:ClockService) { 
 
-    this.clockservice.time.subscribe(t => {
+    this.subscription = this.clockservice.time.subscribe(t => {
       console.log("tick",t)
 
       if(this.goto.index==t){
@@ -21,5 +22,7 @@ export class GotoComponent {
     });
 
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

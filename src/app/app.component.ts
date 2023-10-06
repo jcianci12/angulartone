@@ -1,18 +1,18 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { TonePlayer } from './services/TonePlayer';
+import { ToneManager } from './services/TonePlayer';
 import { Goto, ToneInterface } from './interfaces/tone';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[TonePlayer]
+  providers:[ToneManager]
 })
 export class AppComponent {
   title = 'app';
-  constructor(private ref: ChangeDetectorRef,public player:TonePlayer) {
+  tones!: (ToneInterface | Goto)[];
+  constructor(private ref: ChangeDetectorRef,public player:ToneManager) {
    
-    
   }
 
   addTone() {
@@ -22,10 +22,13 @@ export class AppComponent {
     this.player.addGoto(1, generateUID(),1);
   }
  
-  deleteTone(tone: ToneInterface | Goto) {
+  ngOnInit(): void {
+    this.player.tonessubject.subscribe(i=>
+      {
+      console.log("tones",i)
+      this.tones = i})
+    this.player.init()
 
-    this.player.tones = this.player.tones.filter(t => t?.uid !== tone.uid);
-    
   }
 
 
