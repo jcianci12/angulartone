@@ -12,6 +12,8 @@
   <tbody>
     <tr *ngFor="let item of player.tones">
       <td>
+        <app-delete [tone]="item"></app-delete>
+
         <ng-container *ngIf="item | isTone; else gotoBlock">
           <app-tone [tone]="item|gettone"></app-tone>
         </ng-container>

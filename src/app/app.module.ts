@@ -12,6 +12,7 @@ import { GettonePipe } from './pipes/gettone.pipe';
 import { GotoComponent } from './goto/goto.component';
 import { IsgotoPipe } from './pipes/isgoto.pipe';
 import { GetgotoPipe } from './pipes/getgoto.pipe';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GetgotoPipe } from './pipes/getgoto.pipe';
     GettonePipe,
     GotoComponent,
     IsgotoPipe,
-    GetgotoPipe
+    GetgotoPipe,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
