@@ -29,11 +29,7 @@ export class TonePlayer {
         // Code to play the tone goes here
         // console.log(`Playing a ${tone.type} wave at ${tone.note} Hz for ${tone.duration} ms`);
     }
-    deleteTone(tone: ToneInterface | Goto) {
-
-        this.tones = this.tones.filter(t => t?.uid !== tone.uid);
-        
-      }
+   
 
       
 }

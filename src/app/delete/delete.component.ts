@@ -1,20 +1,21 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Goto, ToneInterface } from '../interfaces/tone';
 import { TonePlayer } from '../services/TonePlayer';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-delete',
   templateUrl: './delete.component.html',
   styleUrls: ['./delete.component.css'],
-  providers:[TonePlayer]
+  providers:[AppComponent]
 })
 export class DeleteComponent {
-  constructor(public toneplayer:TonePlayer,private ref: ChangeDetectorRef){
+  constructor(public appcomponent:AppComponent,private ref: ChangeDetectorRef){
 
   }
 @Input() tone!:ToneInterface|Goto
 delete(tone:ToneInterface|Goto){
   console.log(tone)
-this.toneplayer.deleteTone(tone)
+this.appcomponent.deleteTone(tone)
 }
 }

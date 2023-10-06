@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { TonePlayer } from './services/TonePlayer';
-import { ToneInterface } from './interfaces/tone';
+import { Goto, ToneInterface } from './interfaces/tone';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,11 @@ export class AppComponent {
     this.player.addGoto(1, generateUID(),1);
   }
  
+  deleteTone(tone: ToneInterface | Goto) {
 
+    this.player.tones = this.player.tones.filter(t => t?.uid !== tone.uid);
+    
+  }
 
 
 }
