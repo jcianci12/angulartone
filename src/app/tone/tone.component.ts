@@ -14,9 +14,9 @@ import { ToneManager } from '../services/TonePlayer';
   providers:[ToneService]
 })
 export class ToneComponent implements OnInit {
-  @Input() tone:ToneInterface = {duration:"8n",index:1,note:"C4",type:"sine",uid:"1"};
+  @Input() tone:ToneInterface = {duration:"8n",index:1,note:"C4",type:"sine",uid:"1",distortion:0};
   durations = ['8n', '4n', '2n']; // Update durations to use Tone.js rhythmic values
-  notes = ['C4','D4','E4','F4','G4','A4','B4','C5'] // Update notes to use scientific pitch notation
+  notes = this.generatePianoKeys()
       types = ['sine', 'square', 'sawtooth', 'triangle'];
 time = 0
   subscription: any;
@@ -40,5 +40,20 @@ this.time = t
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+  generatePianoKeys() {
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    let pianoKeys = [];
+  
+    for (let i = 0; i < 8; i++) {
+      for (let note of notes) {
+        pianoKeys.push(note + i);
+      }
+    }
+  
+    // Add the last C note
+    pianoKeys.push('C8');
+  
+    return pianoKeys;
   }
 }

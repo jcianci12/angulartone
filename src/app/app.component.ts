@@ -16,7 +16,7 @@ export class AppComponent {
   }
 
   addTone() {
-    this.player.addTone('sine', 'C4', "8n", 1, generateUID());
+    this.player.addTone('sine', 'C4', "8n", 1, generateUID(),0);
   }
   addGoto(){
     this.player.addGoto(1, generateUID(),1);

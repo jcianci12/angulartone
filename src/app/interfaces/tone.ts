@@ -4,6 +4,7 @@ export interface ToneInterface {
     duration: string;
     index:number;
     uid:string;
+    distortion: number;
   }
 
   export interface Goto {
