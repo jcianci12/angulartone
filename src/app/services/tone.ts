@@ -6,13 +6,21 @@ import * as Tone from 'tone';
 })
 
 export class ToneService {
+  private distortion: Tone.Distortion;
+  private synth: Tone.PolySynth;
 
-  constructor() { }
-
-  playTone(tone: {type: string, note: string, duration: string, distortion: number}) {
-    const distortion = new Tone.Distortion(tone.distortion).toDestination();
-    const synth = new Tone.PolySynth(Tone.Synth).connect(distortion).toDestination();
-    synth.triggerAttackRelease(tone.note, tone.duration);
+  constructor() { 
+    this.distortion = new Tone.Distortion().toDestination();
+    this.synth = new Tone.PolySynth(Tone.Synth).connect(this.distortion).toDestination();
   }
 
+  playTone(tone: {type: string, note: string, duration: string, distortion: number}) {
+    this.distortion.distortion = tone.distortion;
+    this.synth.triggerAttackRelease(tone.note, tone.duration);
+  }
+
+  ngOnDestroy() {
+    this.synth.dispose();
+    this.distortion.dispose();
+  }
 }
