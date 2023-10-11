@@ -13,6 +13,8 @@ import { GotoComponent } from './goto/goto.component';
 import { IsgotoPipe } from './pipes/isgoto.pipe';
 import { GetgotoPipe } from './pipes/getgoto.pipe';
 import { DeleteComponent } from './delete/delete.component';
+import { PianoComponent } from './piano/piano.component';
+import { IsBlackNotePipe } from './pipes/is-black-note.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DeleteComponent } from './delete/delete.component';
     GotoComponent,
     IsgotoPipe,
     GetgotoPipe,
-    DeleteComponent
+    DeleteComponent,
+    PianoComponent,
+    IsBlackNotePipe
   ],
   imports: [
     BrowserModule,

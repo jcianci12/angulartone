@@ -1,0 +1,10 @@
+
+  <div class="piano">
+
+ <ng-container *ngFor="let note of notes" >
+    <button  [class.active]="note==selectedNote" [class.black]="note | isBlackNote"  [class.white]="(note | isBlackNote)==false"  (click)="selectNote(note)"> </button>
+
+  </ng-container>
+
+  </div>
+ 
