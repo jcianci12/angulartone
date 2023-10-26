@@ -4,9 +4,9 @@ import { BehaviorSubject, Subject } from "rxjs";
 
 export class ToneManager {
     tones: (ToneInterface|Goto)[] = [
-        { "type": "sine", "note": "C2", "duration": "8n", "index": 1, "uid": "lncs5v462n2yrb9p6s2",distortion:0 },
-        { "type": "sine", "note": "D4", "duration": "8n", "index": 2, "uid": "lncs5v93ujot8pp2hec",distortion:0 },
-        { "type": "sine", "note": "E4", "duration": "8n", "index": 3, "uid": "lncs5vdtn1e8sehr7rr",distortion:0 },
+        { "type": "sine", "note":[ "C2"], "duration": "8n", "index": 1, "uid": "lncs5v462n2yrb9p6s2",distortion:0 },
+        { "type": "sine", "note":[ "D4"], "duration": "8n", "index": 2, "uid": "lncs5v93ujot8pp2hec",distortion:0 },
+        { "type": "sine", "note":[ "E4"], "duration": "8n", "index": 3, "uid": "lncs5vdtn1e8sehr7rr",distortion:0 },
         { "index": 4, "uid": "lncs5vu0qurrph2u8jb", "gotoIndex": 0 }
       ];
 
@@ -21,7 +21,7 @@ export class ToneManager {
     
    }
 
-    addTone(type: string, note: string, duration: string, index: number,uid:string,distortion:number) {
+    addTone(type: string, note: string[], duration: string, index: number,uid:string,distortion:number) {
         this.tones.push({ type, note, duration, index,uid ,distortion});
         this.tonessubject.next(this.tones)
     }

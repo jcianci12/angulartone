@@ -1,6 +1,6 @@
 export interface ToneInterface {
     type: string;
-    note: string;
+    note: string[];
     duration: string;
     index:number;
     uid:string;

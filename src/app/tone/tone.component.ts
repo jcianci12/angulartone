@@ -14,7 +14,7 @@ import { ToneManager } from '../services/TonePlayer';
   providers:[ToneService]
 })
 export class ToneComponent implements OnInit {
-  @Input() tone:ToneInterface = {duration:"8n",index:1,note:"C4",type:"sine",uid:"1",distortion:0};
+  @Input() tone!:ToneInterface;
   durations = ['8n', '4n', '2n']; // Update durations to use Tone.js rhythmic values
   notes = this.generatePianoKeys()
       types = ['sine', 'square', 'sawtooth', 'triangle'];
@@ -26,7 +26,7 @@ time = 0
 this.time = t
       console.log("tick",t)
 
-      if(this.tone.index==t){
+      if(this.tone?.index==t){
         this.toneservice.playTone(this.tone);
       }
     });

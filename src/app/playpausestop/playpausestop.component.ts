@@ -9,16 +9,21 @@ import { ClockService } from '../services/clock';
 export class PlaypausestopComponent {
 
   intervalId:any;
-
+tempo:number = 100
   constructor(public clockservice:ClockService) { }
 
 
-  // ngOnInit(): void {
-  //   this.time.subscribe(t => {
-  //     console.log("tick",t)
-
-     
-  //   });
-  // }
+  ngOnInit(): void {
+    
+  }
+  updateTempo(newTempo: number) {
+    this.clockservice.tempoSubject.next(newTempo);
+    if (this.clockservice.intervalId) {
+      // If the clock is running, restart it with the new tempo
+      this.clockservice.stop();
+      this.clockservice.start();
+    }
+  }
+  
 }
 

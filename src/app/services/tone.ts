@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Tone from 'tone';
+import { ToneInterface } from '../interfaces/tone';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,12 @@ export class ToneService {
     this.synth = new Tone.PolySynth(Tone.Synth).connect(this.distortion).toDestination();
   }
 
-  playTone(tone: {type: string, note: string, duration: string, distortion: number}) {
+  playTone(tone: ToneInterface) {
     this.distortion.distortion = tone.distortion;
-    this.synth.triggerAttackRelease(tone.note, tone.duration);
+    tone.note.forEach(n => {
+          this.synth.triggerAttackRelease(n, tone.duration);
+
+    });
   }
 
   ngOnDestroy() {
